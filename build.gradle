@@ -1,0 +1,61 @@
+buildscript {
+  ext {
+    kotlinVersion = '1.2.20'
+    springBootVersion = '2.0.0.RELEASE'
+  }
+  repositories {
+    jcenter()
+    maven { url("http://platform-acceleration-lab-maven.s3.amazonaws.com") }
+  }
+
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+    classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    classpath("io.pivotal.pal.assignments:assignments-plugin:+")
+  }
+}
+
+apply plugin: "kotlin"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "io.pivotal.pal.assignments.plugin"
+
+jar {
+  baseName = "pal-tracker"
+}
+
+assignments {
+  apiUrl = "https://caddy.pal.pivotal.io"
+  email = "shyamsundar.shanmugam@wipro.com"
+  cohortIdentifier = "349802185"
+}
+
+group = 'io.pivotal.pal.tracker'
+version = '0.0.1'
+sourceCompatibility = 1.8
+compileKotlin {
+  kotlinOptions {
+    freeCompilerArgs = ["-Xjsr305=strict"]
+    jvmTarget = "1.8"
+  }
+}
+compileTestKotlin {
+  kotlinOptions {
+    freeCompilerArgs = ["-Xjsr305=strict"]
+    jvmTarget = "1.8"
+  }
+}
+
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile("org.jetbrains.kotlin:kotlin-reflect")
+  compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+  compile('org.springframework.boot:spring-boot-starter')
+  compile("org.springframework.boot:spring-boot-starter-web")
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+}
