@@ -7,7 +7,7 @@ class WelcomeControllerTest {
 
     @Test
     fun sayHello() {
-        val controller = WelcomeController("Hello World!")
-        assertEquals("Hello World!", controller.sayHello())
+        val controller = WelcomeController("Hello Universe!")
+        assertEquals("Hello Universe!", controller.sayHello())
     }
 }
