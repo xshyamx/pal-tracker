@@ -3,4 +3,4 @@ applications:
   path: build/libs/pal-tracker.jar
   host: ps-pal-tracker
   env:
-    WELCOME_MESSAGE: Hello from Cloud Foundry (Production)
+    WELCOME_MESSAGE: Hello from the production environment
