@@ -2,10 +2,7 @@ package io.pivotal.pal.tracker;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class TimeEntryController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<TimeEntry> create(TimeEntry timeEntryToCreate) {
+    public ResponseEntity<TimeEntry> create(@RequestBody TimeEntry timeEntryToCreate) {
         TimeEntry savedTimeEntry = repository.create(timeEntryToCreate);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTimeEntry);
     }
@@ -40,8 +37,8 @@ public class TimeEntryController {
        return ResponseEntity.ok(listTimeEntry);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity update(long l, TimeEntry expected) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity update(@PathVariable("id") long l, @RequestBody TimeEntry expected) {
         TimeEntry updateTimeEntry = repository.update(l,expected);
         if (updateTimeEntry == null){
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -50,8 +47,8 @@ public class TimeEntryController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity delete(long l) {
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(@PathVariable("id") long l) {
         repository.delete(l);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
