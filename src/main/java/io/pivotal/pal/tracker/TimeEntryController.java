@@ -1,5 +1,6 @@
 package io.pivotal.pal.tracker;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,12 +14,16 @@ public class TimeEntryController {
 
     public ResponseEntity<TimeEntry> create(TimeEntry timeEntryToCreate) {
         TimeEntry savedTimeEntry = repository.create(timeEntryToCreate);
-        return ResponseEntity.ok(savedTimeEntry);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedTimeEntry);
     }
 
     public ResponseEntity<TimeEntry> read(long l) {
         TimeEntry findTimeEntry = repository.find(l);
-        return ResponseEntity.ok(findTimeEntry);
+        if ( findTimeEntry == null ) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.ok(findTimeEntry);
+        }
     }
 
     public ResponseEntity<List<TimeEntry>> list() {
@@ -28,11 +33,15 @@ public class TimeEntryController {
 
     public ResponseEntity update(long l, TimeEntry expected) {
         TimeEntry updateTimeEntry = repository.update(l,expected);
-        return ResponseEntity.ok(updateTimeEntry);
+        if (updateTimeEntry == null){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else {
+            return ResponseEntity.ok(updateTimeEntry);
+        }
     }
 
-    public ResponseEntity<TimeEntry> delete(long l) {
-        TimeEntry deleteTimeEntry = repository.delete(l);
-        return ResponseEntity.ok(deleteTimeEntry);
+    public ResponseEntity delete(long l) {
+        repository.delete(l);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
