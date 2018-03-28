@@ -11,7 +11,7 @@ resources:
   type: s3
   source:
     bucket: {{aws-bucket}}
-    regexp: {{source-regexp}}
+    regexp: kotlin-releases/pal-tracker-(.*).jar
     access_key_id: {{aws-access-key-id}}
     secret_access_key: {{aws-secret-access-key}}
 
@@ -19,7 +19,7 @@ resources:
   type: semver
   source:
     bucket: {{aws-bucket}}
-    key: {{version-key}}
+    key: pal-tracker/kotlin-version
     access_key_id: {{aws-access-key-id}}
     secret_access_key: {{aws-secret-access-key}}
 
@@ -52,7 +52,7 @@ jobs:
     file: pal-tracker/ci/build.yml
   - put: pal-tracker-artifacts
     params:
-      file: {{build-output-path}}
+      file: build-output/pal-tracker-*.jar
   - put: version
     params:
       file: version/number
@@ -66,7 +66,7 @@ jobs:
   - put: review-deployment
     params:
       manifest: pal-tracker/manifest-review.yml
-      path: {{artifact-path}}
+      path: pal-tracker-artifacts/pal-tracker-*.jar
       environment_variables:
         WELCOME_MESSAGE: "Hello from the review environment"
 
@@ -78,6 +78,6 @@ jobs:
   - put: production-deployment
     params:
       manifest: pal-tracker/manifest-production.yml
-      path: {{artifact-path}}
+      path: pal-tracker-artifacts/pal-tracker-*.jar
       environment_variables:
         WELCOME_MESSAGE: "Hello from the production environment"
