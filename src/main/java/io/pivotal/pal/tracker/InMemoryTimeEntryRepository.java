@@ -1,5 +1,7 @@
 package io.pivotal.pal.tracker;
 
+import org.springframework.context.annotation.Bean;
+
 import java.sql.Time;
 import java.util.*;
 
