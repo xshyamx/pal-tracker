@@ -19,7 +19,7 @@ class WelcomeApiTest constructor(@Autowired private val restTemplate: TestRestTe
 
     @Test
     fun sayHello() {
-        val body = restTemplate?.getForObject("/", String::class.java)
+        val body = restTemplate.getForObject("/", String::class.java)
         assertEquals("Hello from test", body)
     }
 }
