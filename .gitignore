@@ -5,3 +5,4 @@ out
 .idea
 *.iml
 ci/variables.yml
+ci/variables-*.yml
