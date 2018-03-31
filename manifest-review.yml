@@ -1,6 +1,8 @@
 applications:
-- name: pal-tracker
+- name: pal-tracker-kotlin
   path: build/libs/pal-tracker.jar
   host: pal-tracker-kotlin-review
   env:
     WELCOME_MESSAGE: Hello from the review environment
+  services:
+  - tracker-database
