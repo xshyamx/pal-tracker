@@ -14,5 +14,4 @@ data class TimeEntry constructor(
             this(0, projectId, userId, date, hours)
     constructor() : this(0, 0, 0, LocalDate.now(), 0)
 
-
 }

@@ -8,15 +8,17 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
+import javax.sql.DataSource
 
 
 @SpringBootApplication
-class PalTrackerApplication {
+class PalTrackerApplication(@Autowired private val dataSource: DataSource){
 
     @Bean
     fun timeEntryRepository(): TimeEntryRepository {
-        return InMemoryTimeEntryRepository()
+        return JdbcTimeEntryRepository(dataSource)
     }
 
     @Bean

@@ -49,7 +49,12 @@ dependencies {
   compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   compile('org.springframework.boot:spring-boot-starter')
   compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.springframework.cloud:spring-cloud-cloudfoundry-connector")
   compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.1")
+  compile("org.springframework.boot:spring-boot-starter-jdbc")
+  compile("mysql:mysql-connector-java:6.0.6")
+
+  testRuntimeOnly("com.h2database:h2:1.4.196")
   testCompile("org.springframework.boot:spring-boot-starter-test") {
     exclude module: "junit"
   }
