@@ -13,10 +13,6 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 class PalTrackerApplication {
-    fun main(args: Array<String>) {
-//    SpringApplication.run(PalTrackerApplication::class.java, *args)
-        runApplication<PalTrackerApplication>(*args)
-    }
 
     @Bean
     fun timeEntryRepository(): TimeEntryRepository {
@@ -34,3 +30,7 @@ class PalTrackerApplication {
 
 }
 
+fun main(args: Array<String>) {
+//    SpringApplication.run(PalTrackerApplication::class.java, *args)
+    runApplication<PalTrackerApplication>(*args)
+}

@@ -24,11 +24,11 @@ class TimeEntryApiTest constructor(@Autowired private val restTemplate: TestRest
 
     private val timeEntry = TimeEntry(123L, 456L, LocalDate.parse("2017-01-08"), 8)
 
-    private fun createTimeEntry(): Long {
+    private fun createTimeEntry(): Long? {
         val entity = HttpEntity(timeEntry)
         val response = restTemplate.exchange("/time-entries", HttpMethod.POST, entity, TimeEntry::class.java)
         assertThat(response.statusCode).isEqualTo(HttpStatus.CREATED)
-        return response.body.id
+        return response.body?.id
     }
 
     @Test
