@@ -34,7 +34,7 @@ class JdbcTimeEntryRepository : TimeEntryRepository {
         }
         , holder)
         when (count) {
-            1 -> timeEntry.id = holder.key as Long
+            1 -> timeEntry.id = holder.key!!.toLong()
             else -> throw SQLException("Failed to insert time entry")
         }
         return timeEntry

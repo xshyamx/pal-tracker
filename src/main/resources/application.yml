@@ -11,8 +11,7 @@ spring:
     url: ${cloud.services.tracker-database.connection.jdbcurl:jdbc:h2:mem:tracker_dev}
     username: ${cloud.services.tracker-database.connection.username:sa}
     password: ${cloud.services.tracker-database.connection.password:}
-  jpa:
-    hibernate:
-      ddl-auto: update
-    generate-ddl: true
+    platform: ${cloud.services.tracker-database.jdbcUrlDatabaseType:h2}
+    intialization-mode: always
+    continue-on-error: false
     show-sql: true

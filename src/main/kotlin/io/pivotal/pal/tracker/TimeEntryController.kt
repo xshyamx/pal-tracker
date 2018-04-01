@@ -41,7 +41,7 @@ class TimeEntryController(private val repository: TimeEntryRepository){
     fun delete(@PathVariable("id") id:Long): ResponseEntity<Unit> {
         val deleted = repository.delete(id)
         return when(deleted != null) {
-            true -> ResponseEntity(HttpStatus.OK)
+            true -> ResponseEntity(HttpStatus.NO_CONTENT)
             false -> ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
